@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1766465169 source:d:\kuliah\semester 3\struktur data\tubes fix\tubesfixxzz\library.cpp
+	"library.h"
+	<algorithm>
+	<cctype>
+
+1766461503 d:\kuliah\semester 3\struktur data\tubes fix\tubesfixxzz\library.h
+	<iostream>
+	<string>
+
+1766465358 source:d:\kuliah\semester 3\struktur data\tubes fix\tubesfixxzz\main.cpp
+	<iostream>
+	<string>
+	"library.h"
+
