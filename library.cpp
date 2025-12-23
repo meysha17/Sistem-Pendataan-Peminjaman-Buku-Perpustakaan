@@ -165,44 +165,45 @@ addrBuku findBukuByISBN(ListBuku L, string isbn) {
 
 void deleteBuku(ListBuku &L, ListRelasi &LR, string judul) {
     addrBuku P = findBuku(L, judul);
-    if (!P) {
+    if (P == nullptr) {
         cout << "Buku tidak ditemukan." << endl;
-        return;
-    }
-    addrRelasi R = LR.first;
-    addrRelasi prevR = nullptr;
-    while (R) {
-        addrRelasi nextR = R->next;
-        if (R->child == P) {
-            if (prevR == nullptr) {
-                LR.first = nextR;
-            } else {
-                prevR->next = nextR;
-            }
-            R->next = nullptr; 
-        } else {
-            prevR = R;
-        }
-        R = nextR;
-    }
-
-    // lepaskan buku dari list buku
-    if (L.first == P) {
-        L.first = P->next;
     } else {
-        addrBuku Q = L.first;
-        while (Q && Q->next != P) {
-            Q = Q->next;
+        // Hapus semua relasi yang mengacu ke buku P
+        addrRelasi R = LR.first;
+        addrRelasi prevR = nullptr;
+
+        while (R != nullptr) {
+            addrRelasi nextR = R->next;
+
+            if (R->child == P) {
+                if (prevR == nullptr) {
+                    LR.first = nextR;
+                } else {
+                    prevR->next = nextR;
+                }
+                R->next = nullptr; // lepas relasi
+            } else {
+                prevR = R;
+            }
+
+            R = nextR;
         }
-        if (Q) {
-            Q->next = P->next;
+        // Lepaskan buku dari list
+        if (L.first == P) {
+            L.first = P->next;
+        } else {
+            addrBuku Q = L.first;
+            while (Q != nullptr && Q->next != P) {
+                Q = Q->next;
+            }
+            if (Q != nullptr) {
+                Q->next = P->next;
+            }
         }
+        P->next = nullptr;
+        cout << "Buku '" << judul << "' dihapus dari list." << endl;
     }
-
-    P->next = nullptr;
-    cout << "Buku '" << judul << "' dihapus dari list." << endl;
 }
-
 
 void showAllBuku(ListBuku L) {
     if (L.first) {
