@@ -93,8 +93,6 @@ int main() {
     insertRelasi(LR, alokasiRelasi(gSosial, findBukuByISBN(LB, "B019")));
 
 
-
-
     int pilihan = -1;
     string inGenre, inBuku, inISBN, inPenulis, inGenreBaru, inBukuBaru;
     int inTahun, inStock, inJmlUpdate;
