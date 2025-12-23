@@ -301,19 +301,21 @@ addrRelasi findRelasi(ListRelasi L, string namaGenre, string judulBuku) {
 
 
 void editRelasi(ListRelasi &L, string judulBuku, string genreLama, addrGenre genreBaru) {
-    if (!genreBaru) {
-        cout << "Gagal: Genre baru tidak valid." << endl;
-        return;
-    }
-    addrRelasi R = findRelasi(L, genreLama, judulBuku);
-    if (R) {
-        R->parent = genreBaru;
-        cout << "Buku '" << judulBuku << "' berubah genre dari '"
-             << genreLama << "' ke '" << genreBaru->namaGenre << "'." << endl;
+    if (genreBaru != nullptr) {
+        addrRelasi R = findRelasi(L, genreLama, judulBuku);
+        if (R != nullptr) {
+            R->parent = genreBaru;
+            cout << "Buku '" << judulBuku << "' berubah genre dari '"
+                 << genreLama << "' ke '" << genreBaru->namaGenre << "'." << endl;
+        } else {
+            cout << "Gagal: Buku '" << judulBuku
+                 << "' tidak ditemukan di genre '" << genreLama << "'." << endl;
+        }
     } else {
-        cout << "Gagal: Buku '" << judulBuku<< "' tidak ditemukan di genre '" << genreLama << "'." << endl;
+        cout << "Gagal: Genre baru tidak valid." << endl;
     }
 }
+
 
 void showBukuByGenre(ListRelasi LR, string namaGenre) {
     string key = toLowerStr(namaGenre);
